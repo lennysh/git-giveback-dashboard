@@ -1,0 +1,23 @@
+# Repositories that count toward the leaderboard.
+#
+# Contributors pass this file to git-giveback (--scopes) so only these repos end
+# up in their submission. The PR check and the leaderboard build enforce it too.
+# Scopes are taken from the original Red Hat CoP "Giveback Ninja" program.
+#
+#   name     shown on the leaderboard
+#   host     github.com (only GitHub rows can be verified automatically)
+#   owner    GitHub org or user
+#   repos    optional regex; the repo name (without owner) must fully match
+#   exclude  optional regex of repo names to skip
+#   types    optional subset of: pull_request, review, issue, commits
+
+[[scope]]
+name = "Red Hat CoP"
+host = "github.com"
+owner = "redhat-cop"
+
+[[scope]]
+name = "Red Hat SAP"
+host = "github.com"
+owner = "redhat-sap"
+repos = "sap-(s4hana-deployment|rhsm|hostagent|hana-control|netweaver-control|hana-deployment|hana-hsr|monitoring)"

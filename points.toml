@@ -1,0 +1,43 @@
+# How contributions are scored. For each contribution, the first matching
+# [[rule]] wins; contributions that match no rule are listed but score 0.
+#
+# Rule keys:
+#   kind        pull_request | review | issue | commits      (required)
+#   points      number                                       (required)
+#   state       e.g. merged / open / closed / approved / commented
+#   role        issues: "authored", "assignee", or "authored, assignee"
+#   scope       only contributions in this scope (name from scopes.toml)
+#   per_commit  commits only: multiply points by the commit count
+#   label       optional description shown in git-giveback's Points section
+#
+# The defaults mirror the original Giveback Ninja program: one point per
+# merged PR, per reviewed PR, and per issue closed while assigned to you
+# (self-opened issues don't count).
+
+# Optional season: only contributions dated within it are scored.
+# since = "2026-03-01"
+# until = "2027-02-28"
+
+[[rule]]
+label = "Merged pull requests"
+kind = "pull_request"
+state = "merged"
+points = 1
+
+[[rule]]
+label = "Pull requests reviewed"
+kind = "review"
+points = 1
+
+[[rule]]
+label = "Issues closed as assignee"
+kind = "issue"
+role = "assignee"
+points = 1
+
+# Commits are shown on the leaderboard but not scored by default.
+# [[rule]]
+# label = "Commits"
+# kind = "commits"
+# points = 0.1
+# per_commit = true

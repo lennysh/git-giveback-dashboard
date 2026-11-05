@@ -1,0 +1,52 @@
+name: Build leaderboard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "submissions/**"
+      - "scopes.toml"
+      - "points.toml"
+      - "giveback_board/**"
+  schedule:
+    - cron: "17 6 * * 1"   # weekly: pick up open PRs that have since merged
+  workflow_dispatch:
+    inputs:
+      reverify:
+        description: "Re-check every contribution against GitHub"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-leaderboard
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Rebuild data and leaderboard
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python -m giveback_board build ${{ inputs.reverify && '--reverify' || '' }}
+
+      - name: Commit changes
+        run: |
+          git add data/contributions.csv LEADERBOARD.md
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update leaderboard"
+          git push
