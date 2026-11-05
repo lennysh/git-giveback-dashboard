@@ -11,13 +11,18 @@ There is no server and no database: the repository *is* the dashboard.
 ## What counts
 
 Only contributions in the repositories listed in **[`scopes.toml`](scopes.toml)**
-count. The starting list is the one the original Red Hat CoP *Giveback Ninja*
-program tracked:
+count:
 
 | Scope | Repositories |
 |---|---|
 | Red Hat CoP | every repository in [github.com/redhat-cop](https://github.com/redhat-cop) |
+| Red Hat Official | every repository in [github.com/RedHatOfficial](https://github.com/RedHatOfficial) |
 | Red Hat SAP | the `sap-*` automation repositories in [github.com/redhat-sap](https://github.com/redhat-sap) |
+| Ansible | every repository in [github.com/ansible](https://github.com/ansible) |
+| Ansible TMM | every repository in [github.com/ansible-tmm](https://github.com/ansible-tmm) |
+
+Red Hat CoP and Red Hat SAP come from the original Red Hat CoP *Giveback
+Ninja* program.
 
 Points come from **[`points.toml`](points.toml)**. They also match the
 original program by default:
